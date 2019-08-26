@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .container
+        h1 Add #{sport} score
+        form(action="/sport/add_score/"+sport, method="POST")
+            #form-group
+                label Username:
+                input.form-control(name='username' type='text')
+            #form-group
+                label Score:
+                input.form-control(name='score' type='text')
+            br
+            input.btn.btn-primary(type="submit", value="submit")

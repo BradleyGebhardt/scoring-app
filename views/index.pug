@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    h1= title
+    p Top scores for the week in each sport
+    ul.list-group
+      li.list-group-item.container-fluid
+        .row
+          h4.col.text-info User
+          h4.col.text-info Sport
+          h4.col.text-info Score
+      each score, i in list
+        li.list-group-item.container-fluid
+          .row
+            a(href='/user/' + score.user + '/' + score.id).col= score.user
+            a(href='/sport/'+ score.sport).col= score.sport
+            .col= score.score

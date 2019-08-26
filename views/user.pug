@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .container
+        h1= userInfo.username
+        h2 List of Scores
+        .card
+            .card-header= userInfo.sport
+            .card-body
+                ul.list-group.list-grouo-flush
+                    li.list-group-item
+                        | Score: #{userInfo.score}
+                br
+                a(href='#', data-id=userInfo.id, data-user=userInfo.user).btn.btn-danger.delete-score Delete
+        br

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .container
+        h1=title
+        h3 People who participate
+        ul.list-group
+            each name, i in names
+                li.list-group-item= name
+        br
+        a.btn.btn-primary(href='/sport/add_score/'+title) Add #{title} score
