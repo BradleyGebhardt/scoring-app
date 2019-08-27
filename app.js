@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,6 +13,7 @@ var archeryRouter = require('./routes/sport');
 var addScoreRouter = require('./routes/add_score');
 var editScoreRouter = require('./routes/edit_score');
 var score = require('./models/score');
+const expressValidator = require('express-validator');
 
 // Connect to the MongoDB database
 mongoose.connect('mongodb://localhost/scoring-app', {useNewUrlParser: true});
@@ -39,6 +41,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+}));
 
 app.use('/', indexRouter);
 app.use('/user/:user/:id', usersRouter);
