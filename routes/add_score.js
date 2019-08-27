@@ -17,7 +17,8 @@ router.get('/', function (req, res, next) {
 // Handle the post request 
 router.route('/').post([
   check('username').exists({ checkNull: true, checkFalsy: true }).withMessage('Username is a required field'),
-  check('score').exists({ checkNull: true, checkFalsy: true }).withMessage('Score is a required field')
+  check('score').exists({ checkNull: true, checkFalsy: true }).withMessage('Score is a required field'),
+  check('score').isNumeric().withMessage('Score must be a number')
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
