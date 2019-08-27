@@ -3,12 +3,11 @@ $(document).ready(() => {
         $target = $(e.target);
         const id = $target.attr('data-id');
         const user = $target.attr('data-user');
-        // console.log(user);
+        console.log(id);
         $.ajax({
             method: 'DELETE',
             URL: '/user/' + user + '/' + id,
             success: () => {
-                console.log('Deleting score');
                 window.location.href = '/';
             },
             error: (err) => {

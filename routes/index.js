@@ -5,6 +5,7 @@ let user = require('../models/user');
 
 /* GET home page. */
 router.get('/', function (req, res) {
+  req.session.test = 'test';
   score.find({}, (err, scores) => {
     if (err) {
       console.log(err);

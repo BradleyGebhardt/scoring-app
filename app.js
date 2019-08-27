@@ -11,12 +11,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var archeryRouter = require('./routes/sport');
 var addScoreRouter = require('./routes/add_score');
-var editScoreRouter = require('./routes/edit_score');
 var score = require('./models/score');
-const expressValidator = require('express-validator');
 
 // Connect to the MongoDB database
-mongoose.connect('mongodb://localhost/scoring-app', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/scoring-app', { useNewUrlParser: true });
 let db = mongoose.connection;
 
 // Check the database connection
@@ -47,18 +45,25 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+// Flash middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
 app.use('/', indexRouter);
-app.use('/user/:user/:id', usersRouter);
+app.use('/user', usersRouter);
 app.use('/sport/:sport', archeryRouter);
 app.use('/sport/add_score/:sport', addScoreRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
