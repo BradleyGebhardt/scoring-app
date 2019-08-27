@@ -20,7 +20,6 @@ router.route('/').post((req, res) => {
   score.user = req.body.username;
   score.sport = chosenSport;
   score.score = req.body.score;
-  user.username = req.body.username;
 
   score.save()
     .then(score => {
@@ -29,19 +28,6 @@ router.route('/').post((req, res) => {
     .catch(err => {
       res.status(400).send("unable to save to database");
     })
-
-    console.log(User.findOne({username: user.username}).username);
-
-    if(User.findOne({username: user.username}).username == undefined) {
-      user.password = 'pass';
-      user.save()
-        .then(user => {
-          console.log('Added new user');
-        })
-        .catch(err => {
-          res.status(400).send("unable to save to database");
-        })
-    }
 });
 
 module.exports = router;
