@@ -8,4 +8,6 @@ block content
             each name, i in names
                 li.list-group-item= name
         br
-        a.btn.btn-primary(href='/sport/add_score/'+title) Add #{title} score
+        if user
+            a.btn.btn-primary(href='/sport/add_score/'+title) Add #{title} score
+        else

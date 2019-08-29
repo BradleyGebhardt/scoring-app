@@ -7,7 +7,7 @@ var chosenSport;
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', ensureAuthenticated, function (req, res, next) {
   chosenSport = req.params.sport;
   res.render('add_score', {
     sport: req.params.sport
@@ -43,5 +43,14 @@ router.route('/').post([
       })
   }
 });
+
+function ensureAuthenticated(req, res, next){
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    req.flash('danger', 'Please login');
+    res.redirect('/login');
+  }
+}
 
 module.exports = router;

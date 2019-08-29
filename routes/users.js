@@ -14,15 +14,22 @@ router.route('/:user/:id').get(function (req, res, next) {
     if (err) {
       console.log(err)
     } else {
-      if (req.session.user == found.user) {
-        allowed = true;
+      if(res.locals.user != null) {
+        if (res.locals.user.username == found.user) {
+          allowed = true;
+        } else {
+          allowed = false;
+        }
+        res.render('user', {
+          userInfo: found,
+          signedInUser: allowed
+        });
       } else {
-        allowed = false;
+        res.render('user', {
+          userInfo: found,
+          signedInUser: false
+        });
       }
-      res.render('user', {
-        userInfo: found,
-        signedInUser: allowed
-      });
     }
   });
 });
@@ -47,7 +54,7 @@ router.route('/register').get((req, res) => {
 router.route('/register').post([
   check('username').exists({ checkNull: true, checkFalsy: true }).withMessage('Username is a required field'),
   check('password').exists({ checkNull: true, checkFalsy: true }).withMessage('Password is a required filed'),
-  check('password').isLength({ min: 8, max: 15 }).withMessage('Password is not the right length (min: 8 and max: 15)'),
+  check('password').isLength({ min: 5, max: 15 }).withMessage('Password is not the right length (min: 8 and max: 15)'),
   check('email').exists({ checkNull: true, checkFalsy: true }).isEmail().withMessage('Email is a required field')
 ], (req, res) => {
   const errors = validationResult(req);
@@ -89,5 +96,11 @@ router.route('/register').post([
     });
 
   }
+});
+
+router.route('/logout').get((req, res) => {
+  req.logOut();
+  req.flash('success', 'You are logged out');
+  res.redirect('/login');
 });
 module.exports = router;
