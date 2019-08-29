@@ -11,5 +11,8 @@ block content
                     li.list-group-item
                         | Score: #{userInfo.score}
                 br
-                a(href='#', data-id=userInfo.id, data-user=userInfo.user).btn.btn-danger.delete-score Delete
+                if signedInUser
+                    a(href='#', data-id=userInfo.id, data-user=userInfo.user).btn.btn-danger.delete-score Delete
+                else
+                    
         br

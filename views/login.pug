@@ -2,19 +2,13 @@ extends layout
 
 block content
     .container
-        h1 Register a new user
-        form(action="/user/register", method="POST")
+        h1 Login
+        form(action="/login", method="POST")
             #form-group
                 label Username:
                 input.form-control(name='username' type='text')
             #form-group
                 label Password:
                 input.form-control(name='password' type='password')
-            #form-group
-                label Confirm Password:
-                input.form-control(name='password2' type='password')
-            #form-group
-                label Email:
-                input.form-control(name='email' type='text')
             br
             input.btn.btn-primary(type="submit", value="submit")

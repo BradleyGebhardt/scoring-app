@@ -7,7 +7,7 @@ html(lang='en')
     link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
   body
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark
-            a.navbar-brand(href='#') Scoring app
+            a.navbar-brand(href='') Scoring app
             |   
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
@@ -32,8 +32,11 @@ html(lang='en')
                             a.dropdown-item(href='/sport/Hockey') Hockey
                             |
                             a.dropdown-item(href='/sport/Weighlifting') Weightlifting
-                    li.nav-item
-                      a.nav-link(href='/user/register') Register
+                .navbar-nav
+                  .nav-item
+                    a.nav-link(href='/login') Login
+                  .nav-item
+                    a.nav-link(href='/user/register') Register
     .container
       br
       != messages('message', locals)
