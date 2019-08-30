@@ -12,6 +12,7 @@ router.get('/', ensureAuthenticated, function (req, res, next) {
   res.render('add_score', {
     sport: req.params.sport
   });
+  console.log(document.getElementsByClassName('ScoreLabel'));
 });
 
 // Handle the post request 

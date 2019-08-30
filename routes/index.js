@@ -16,7 +16,6 @@ router.get('/', function (req, res) {
         title: 'Four score and a lot of time',
         list: scores
       });
-      console.log(req.session.user);
     }
   }).sort('user')
     .sort('sport')
